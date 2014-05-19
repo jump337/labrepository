@@ -4,33 +4,70 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>click demo</title>
+  <title>data demo</title>
   <style>
-  p {
+  div {
+    color: blue;
+  }
+  span {
     color: red;
+  }
+  button {
     margin: 5px;
-    cursor: pointer;
+    font-size: 14px;
   }
-  p:hover {
-    background: yellow;
+  p {
+    margin: 5px;
+    color: blue;
   }
+
   </style>
   <script type="text/javascript"  src="js/jquery-1.11.1.js"></script>
 </head>
 <body>
-<p>First Paragraph</p>
-<p>Second Paragraph</p>
-<p>Yet one more Paragraph</p>
+<div>
+  The values stored were
+  <span></span>
+  and
+  <span></span>
+</div>
  
  
- <b>Hello</b><h5>, how are you?</h5>
- 
-<script>
-$( "p" ).click(function() {
-  $( this ).slideUp();
-});
+ <button>Get "blah" from the div</button>
+<button>Set "blah" to "hello"</button>
+<button>Set "blah" to 86</button>
+<button>Remove "blah" from the div</button>
+<p>The "blah" value of this div is <span id="output">?</span></p>
 
-$("b").clone().prependTo("h5");
+<script>
+$( "div" ).data( "test", { first: 16, last: "pizza!" } );
+$( "div span:first" ).text( $( "div" ).data( "test" ).first );
+$( "div span:last" ).text( $( "div" ).data( "test" ).last );
+
+$( "button" ).click(function() {
+	  var value;
+	 
+	  switch ( $( "button" ).index( this ) ) {
+	    case 0 :
+	      value = $( "div" ).data( "blah" );
+	      break;
+	    case 1 :
+	      $( "div" ).data( "blah", "hello" );
+	      value = "Stored!";
+	      
+	      break;
+	    case 2 :
+	      $( "div" ).data( "blah", 86 );
+	      value = "Stored!";
+	      break;
+	    case 3 :
+	      $( "div" ).removeData( "blah" );
+	      value = "Removed!";
+	      break;
+	  }
+	 
+	  $( "#output" ).text( "" + value );
+	});
 </script>
 </body>
 </html>
